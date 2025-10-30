@@ -1,4 +1,4 @@
-const CACHE_NAME = 'satoshi-calc-v3-cache-v2';
+const CACHE_NAME = 'satoshi-calc-v3-cache-v3';
 const urlsToCache = [
   '/',
   '/index.html',
