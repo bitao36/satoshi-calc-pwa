@@ -154,6 +154,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Initial fetch and display of exchange rates
   await fetchAndDisplayExchangeRates(currentDefaultCurrency);
 
+  // Update exchange rates every minute
+  setInterval(() => {
+    fetchAndDisplayExchangeRates(currentDefaultCurrency);
+  }, 60000);
+
   // Event listener for default currency selector change
   defaultCurrencySelector.addEventListener('change', async () => {
     currentDefaultCurrency = defaultCurrencySelector.value;

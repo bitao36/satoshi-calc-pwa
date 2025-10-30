@@ -1,7 +1,7 @@
 {
-  "name": "Satoshi Calc V3",
-  "short_name": "SatoshiCalc",
-  "description": "A simple Satoshi calculator.",
+  "name": "Satoshi Calc ₿",
+  "short_name": "Calc ₿",
+  "description": "Sencilla calculadora de satoshis a moneda fiat.",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
