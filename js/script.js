@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     const data = await response.json();
     cachedExchangeRates = data; // Cache the fetched data
+    localStorage.setItem('cachedExchangeRates', JSON.stringify(data)); // Store in localStorage
 
     const btcValue = data.BTC;
     labelfiatUSD.innerHTML = `1 BTC equivale a <span class="fiat-value">${formatNumber(btcValue)}</span> USD`;
@@ -116,11 +117,31 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     return data; // Return data for immediate use if needed
     } catch (error) {
-    console.error("Hubo un error:", error);
-    labelfiatUSD.textContent = "Error al obtener la conversión.";
-    usdToDefaultCurrency.textContent = "Error al obtener la conversión.";
-    cachedExchangeRates = null; // Clear cache on error
-    return null;
+      console.error("Hubo un error:", error);
+      console.log("Attempting to load from localStorage...");
+      const storedRates = localStorage.getItem('cachedExchangeRates');
+      if (storedRates) {
+        console.log("Found stored rates in localStorage.");
+        const data = JSON.parse(storedRates);
+        cachedExchangeRates = data;
+
+        const btcValue = data.BTC;
+        labelfiatUSD.innerHTML = `1 BTC equivale a <span class="fiat-value">${formatNumber(btcValue)}</span> USD (offline)`;
+
+        const usdToDefaultCurrencyValue = data.USD[defaultCurrency];
+        if (usdToDefaultCurrencyValue) {
+          usdToDefaultCurrency.innerHTML = `1 USD equivale a <span class="fiat-value">${formatNumber(usdToDefaultCurrencyValue)}</span> ${defaultCurrency} (offline)`;
+        } else {
+          usdToDefaultCurrency.textContent = `Error al obtener 1 USD a ${defaultCurrency}`;
+        }
+        return data;
+      } else {
+        console.log("No stored rates found in localStorage.");
+        labelfiatUSD.textContent = "Error al obtener la conversión.";
+        usdToDefaultCurrency.textContent = "Error al obtener la conversión.";
+        cachedExchangeRates = null; // Clear cache on error
+        return null;
+      }
     }
   }
 
