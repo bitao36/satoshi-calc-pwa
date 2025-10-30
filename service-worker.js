@@ -1,12 +1,12 @@
-const CACHE_NAME = 'satoshi-calc-v3-cache-v3';
+const CACHE_NAME = 'satoshi-calc-v3-cache-v4';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/css/estilos.css',
-  '/js/script.js',
-  '/img/favicon.ico',
-  '/img/icons/icon-192x192.png',
-  '/img/icons/icon-512x512.png'
+  './',
+  'index.html',
+  'css/estilos.css',
+  'js/script.js',
+  'img/favicon.ico',
+  'img/icons/icon-192x192.png',
+  'img/icons/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
