@@ -136,21 +136,27 @@
   <div id="infoModal" class="modal">
     <div class="modal-content">
       <span class="close-button">&times;</span>
-      <p>
+      
      <h3>Características</h3>
-      <ul>
+     <p>
+       <ul>
         <li>Para obtener el precio de las divisas se usa la API de yadio.io</li>
         <li>El precio se actualiza cada minuto.</li>
-        <li>Si se pierde la conexión a internet se usa el último valor obtenido.</li>
+        <li>Si se pierde la conexión a internet, se usa el último valor obtenido.</li>
         <li>La divisa por defecto se puede configurar haciendo click en el icono de configuración.</li>
       </ul>
       </p>
-      <p>
+      
       <h3>Motivación</h3>
-      Creé esta sencilla aplicación ya que ninguna de las calculadoras actuales cubria mis necesidades y la quise compartir con todos aquellos bitcoiners que la deseen usar.</p>
-      Si te parece útil me puedes enviar una propina a la siguiente lightning address <span><strong>bitao7@blink.sv</strong></span> o en el siguiente enlace <a href="https://pay.blink.sv/bitao7" target="_blank"> Dejar propina </a>
+      <p>
+       Creé esta sencilla aplicación ya que ninguna de las calculadoras actuales cubria mis necesidades y la quise compartir con todos aquellos bitcoiners que la deseen usar.
       </p>
-      <p>Desarrollada por <a href="https://twitter.com/bitao36" target="_blank">@bitao36</a></p>
+      <p>
+      Si te parece útil me puedes enviar una propina a la siguiente lightning address <span><strong>bitao7@blink.sv</strong></span> o en el siguiente enlace 
+      <a href="https://pay.blink.sv/bitao7" target="_blank"> Dejar propina </a>
+      </p>
+      <p> Desarrollada por <a href="https://twitter.com/bitao36" target="_blank">@bitao36</a>
+      </p>
 
     </div>
   </div>
@@ -168,16 +174,5 @@
     </div>
   </div>
   <script src="js/script.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js').then(registration => {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, err => {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-      });
-    }
-  </script>
 </body>
 </html>

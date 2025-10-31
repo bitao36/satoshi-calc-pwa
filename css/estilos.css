@@ -89,7 +89,7 @@ body {
   position: relative; /* For absolute positioning of close button */
 }
 
-.modal-content p {
+#infoModal .modal-content p {
   text-align: justify;
 }
 
