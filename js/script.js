@@ -45,11 +45,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   // New elements for footer icons and modals
   const infoIconBtn = document.getElementById("infoIconBtn");
   const settingsIconBtn = document.getElementById("settingsIconBtn");
+  const learningIconBtn = document.getElementById("learningIconBtn");
   const infoModal = document.getElementById("infoModal");
   const settingsModal = document.getElementById("settingsModal");
+  const learningModal = document.getElementById("learningModal");
   // Get close buttons for modals
   const infoCloseBtn = infoModal.querySelector(".close-button");
   const settingsCloseBtn = settingsModal.querySelector(".close-button");
+  const learningCloseBtn = learningModal.querySelector(".close-button");
 
   // New elements for numeric keypad
   const numericKeypadCrypto = document.getElementById("numericKeypadCrypto");
@@ -289,6 +292,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     settingsModal.style.display = 'flex'; // Use flex to center the modal
   });
 
+  learningIconBtn.addEventListener('click', () => {
+    learningModal.style.display = 'flex'; // Use flex to center the modal
+  });
+
   // Event listeners for closing modals
   infoCloseBtn.addEventListener('click', () => {
     infoModal.style.display = 'none';
@@ -298,10 +305,17 @@ document.addEventListener("DOMContentLoaded", async function () {
     settingsModal.style.display = 'none';
   });
 
+  learningCloseBtn.addEventListener('click', () => {
+    learningModal.style.display = 'none';
+  });
+
   // Close modal if user clicks outside of it
   window.addEventListener('click', (event) => {
     if (event.target == infoModal) {
       infoModal.style.display = 'none';
+    }
+    if (event.target == learningModal) {
+      learningModal.style.display = 'none';
     }
     // Close settings modal if clicked outside, but not if clicking a keypad button
     if (event.target == settingsModal && !event.target.closest('.numeric-keypad')) {
