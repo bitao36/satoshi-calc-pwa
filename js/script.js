@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Load saved default currency from localStorage or use 'COP' as initial default
   let currentDefaultCurrency = localStorage.getItem('defaultUSDConversionCurrency') || 'COP';
   defaultCurrencySelector.value = currentDefaultCurrency;
+  currencySelector.value = currentDefaultCurrency;
 
   // Variable to cache API response
   let cachedExchangeRates = null;
@@ -186,6 +187,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Event listener for default currency selector change
   defaultCurrencySelector.addEventListener('change', async () => {
     currentDefaultCurrency = defaultCurrencySelector.value;
+    currencySelector.value = currentDefaultCurrency;
     localStorage.setItem('defaultUSDConversionCurrency', currentDefaultCurrency); // Save preference
     await fetchAndDisplayExchangeRates(currentDefaultCurrency); // Update display
   });
@@ -375,14 +377,28 @@ document.addEventListener("DOMContentLoaded", async function () {
         labelResultado.classList.add("visible");
       }       
       
+      const parsedAmount = parseFloat(amountValue);
+      let displayAmount;
 
-      labelResultadoUSD.textContent = `${amountValue} ${unidad} equivalen a ${formatNumber(valorUSD)} USD`;
+      if (unidad === 'BTC') {
+        const satsAmount = parsedAmount * 100000000;
+        const satsFormatter = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 });
+        displayAmount = `${amountValue} ${unidad} (${satsFormatter.format(satsAmount)} sats)`;
+      } else if (unidad === 'sats') {
+        const btcAmount = parsedAmount / 100000000;
+        const satsFormatter = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 });
+        displayAmount = `${satsFormatter.format(parsedAmount)} ${unidad} (${parseFloat(btcAmount.toFixed(8))} BTC)`;
+      } else {
+        displayAmount = `${amountValue} ${unidad}`;
+      }
+
+      labelResultadoUSD.textContent = `${displayAmount} equivalen a ${formatNumber(valorUSD)} USD`;
 
             
       labelResultadoUSD.classList.remove("hidden");
       labelResultadoUSD.classList.add("visible");
 
-      labelResultadoDivisa.textContent = `${amountValue} ${unidad} equivalen a ${formatNumber(valorFiat)} ${divisa}`;
+      labelResultadoDivisa.textContent = `${displayAmount} equivalen a ${formatNumber(valorFiat)} ${divisa}`;
       labelResultadoDivisa.classList.remove("hidden");
       labelResultadoDivisa.classList.add("visible");
 
